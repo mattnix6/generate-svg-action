@@ -24,7 +24,7 @@ pip install --upgrade pip
 pip install -r /app/requirements.txt
 
 # Run the Python script to generate the SVG
-python -m /app/generate_svg.svg_generator
+python -m generate_svg.svg_generator
 
 # Create and checkout to the specified branch
 git checkout -b $BRANCH
