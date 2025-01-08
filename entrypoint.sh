@@ -33,8 +33,8 @@ python -m generate_svg.svg_generator
 git checkout -b $BRANCH
 
 # Commit and push the SVG to the specified branch
-git config --global user.name "github-actions[bot]"
-git config --global user.email "github-actions[bot]@users.noreply.github.com"
+git config --global user.name "mattnix6"
+git config --global user.email "nirina.ran@smartone.ai"
 
 # Set up authentication using GITHUB_TOKEN
 git remote set-url origin https://github-actions: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@github.com/mattnix6/generate-svg-action.git
