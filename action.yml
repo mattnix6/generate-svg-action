@@ -1,6 +1,6 @@
 name: 'Generate Commit SVG'
 description: 'Generates a commit percentage SVG dashboard'
-author: 'Your Name'
+author: 'Nix Ran'
 inputs:
   repository:
     description: 'The repository to analyze (default: current repository)'
