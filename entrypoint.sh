@@ -37,7 +37,7 @@ git config --global user.name "mattnix6"
 git config --global user.email "nirina.ran@smartone.ai"
 
 # Set up authentication using GITHUB_TOKEN
-git remote set-url origin https://github-actions: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@github.com/mattnix6/generate-svg-action.git
+git remote set-url origin https://github-actions:${{ secrets.GITHUB_TOKEN }}@github.com/mattnix6/generate-svg-action.git
 
 git add output/commit_percentage.svg
 git commit -m "Update commit percentage dashboard SVG"
