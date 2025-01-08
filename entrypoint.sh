@@ -16,7 +16,6 @@ if [ "$REPOSITORY" != "." ]; then
   cd $(basename "$REPOSITORY" .git)  # Move into the cloned repo
 else
   echo "Using current repository."
-  REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}  # Use current repository by default
   cd $(pwd)  # Stay in the current repository
 fi
 
@@ -38,7 +37,7 @@ git config --global user.name "github-actions[bot]"
 git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
 # Set up authentication using GITHUB_TOKEN
-git remote set-url origin https://github-actions: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@github.com/$REPOSITORY.git
+git remote set-url origin https://github-actions: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@github.com/$GITHUB_REPOSITORY.git
 
 git add output/commit_percentage.svg
 git commit -m "Update commit percentage dashboard SVG"
