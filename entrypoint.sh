@@ -35,6 +35,10 @@ git checkout -b $BRANCH
 # Commit and push the SVG to the specified branch
 git config --global user.name "github-actions[bot]"
 git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+# Set up authentication using GITHUB_TOKEN
+git remote set-url origin https://github-actions:${{ secrets.GITHUB_TOKEN }}@github.com/$REPOSITORY.git
+
 git add output/commit_percentage.svg
 git commit -m "Update commit percentage dashboard SVG"
 git push --set-upstream origin $BRANCH
