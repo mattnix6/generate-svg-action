@@ -15,8 +15,8 @@ COPY requirements.txt /app/requirements.txt
 RUN chmod +x /app/entrypoint.sh
 
 # Run as non-root user (optional)
-RUN adduser --disabled-password --gecos '' appuser && chown -R appuser /app
-USER appuser
+# RUN adduser --disabled-password --gecos '' appuser && chown -R appuser /app
+# USER appuser
 
 # Set entrypoint
 ENTRYPOINT ["/app/entrypoint.sh"]
