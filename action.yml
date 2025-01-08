@@ -1,0 +1,17 @@
+name: 'Generate Commit SVG'
+description: 'Generates a commit percentage SVG dashboard'
+author: 'Your Name'
+inputs:
+  repository:
+    description: 'The repository to analyze (default: current repository)'
+    required: false
+    default: '.'
+  branch:
+    description: 'The branch to push the generated SVG to (default: commit-dashboard)'
+    required: false
+    default: 'commit-dashboard'
+
+runs:
+  using: 'docker'
+  image: 'docker://python:3.9-slim'
+  entrypoint: ['bash', 'entrypoint.sh']
