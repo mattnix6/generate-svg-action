@@ -19,6 +19,9 @@ else
   cd $(pwd)  # Stay in the current repository
 fi
 
+# Mark the repository as a safe directory to avoid ownership errors
+git config --global --add safe.directory /github/workspace
+
 # Install dependencies
 pip install --upgrade pip
 pip install -r /app/requirements.txt
