@@ -1,8 +1,13 @@
 #!/bin/bash
 
+set -e  # Exit immediately on error
+
 # Set defaults for the repository and branch
 REPOSITORY=${INPUT_REPOSITORY:-.}
 BRANCH=${INPUT_BRANCH:-commit-dashboard}
+
+# Export PYTHONPATH
+export PYTHONPATH=/app
 
 # If repository is specified, clone it
 if [ "$REPOSITORY" != "." ]; then
@@ -16,10 +21,10 @@ fi
 
 # Install dependencies
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r /app/requirements.txt
 
 # Run the Python script to generate the SVG
-python -m generate_svg.svg_generator
+python -m /app/generate_svg.svg_generator
 
 # Create and checkout to the specified branch
 git checkout -b $BRANCH
