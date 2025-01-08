@@ -16,6 +16,7 @@ if [ "$REPOSITORY" != "." ]; then
   cd $(basename "$REPOSITORY" .git)  # Move into the cloned repo
 else
   echo "Using current repository."
+  REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}  # Use current repository by default
   cd $(pwd)  # Stay in the current repository
 fi
 
