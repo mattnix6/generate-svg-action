@@ -3,7 +3,7 @@
 set -e  # Exit immediately on error
 
 # Set defaults for the repository and branch
-REPOSITORY=${INPUT_REPOSITORY:-.}
+REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}
 BRANCH=${INPUT_BRANCH:-commit-dashboard}
 
 # Export PYTHONPATH
@@ -37,7 +37,7 @@ git config --global user.name "github-actions[bot]"
 git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
 # Set up authentication using GITHUB_TOKEN
-git remote set-url origin https://github-actions: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@github.com/$GITHUB_REPOSITORY.git
+git remote set-url origin https://github-actions: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@github.com/mattnix6/generate-svg-action.git
 
 git add output/commit_percentage.svg
 git commit -m "Update commit percentage dashboard SVG"
