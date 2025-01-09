@@ -75,7 +75,7 @@ def generate_commit_percentage_svg(token, repository, branch="main"):
     svg_content += "</svg>"
 
     # Write SVG to output directory
-    os.makedirs("output", exist_ok=True)
+    os.makedirs("../output", exist_ok=True)
     with open("../output/commit_percentage.svg", "w") as f:  # Save outside the temp_repo
         f.write(svg_content)
 
