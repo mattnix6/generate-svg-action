@@ -21,4 +21,5 @@ runs:
   args:
     - ${{ inputs.repository }}
     - ${{ inputs.branch }}
-    - ${{ inputs.token }}
+  env:
+    TOKEN: ${{ inputs.token }}  # Pass the token to the Docker container
