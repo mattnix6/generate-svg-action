@@ -11,6 +11,9 @@ inputs:
     description: 'The branch to push the generated SVG to (default: commit-dashboard)'
     required: false
     default: 'commit-dashboard'
+  token:
+    description: 'GitHub token used for authentication'
+    required: true
 
 runs:
   using: 'docker'
@@ -18,3 +21,4 @@ runs:
   args:
     - ${{ inputs.repository }}
     - ${{ inputs.branch }}
+    - ${{ inputs.token }}
