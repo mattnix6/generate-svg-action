@@ -27,8 +27,8 @@ git config --global --add safe.directory /github/workspace
 pip install --upgrade pip
 pip install -r /app/requirements.txt
 
-# Run the Python script to generate the SVG
-python -m generate_svg.svg_generator
+# Run the Python script and pass TOKEN and REPOSITORY as arguments
+python -m generate_svg.svg_generator "$TOKEN" "$REPOSITORY"
 
 # Create and checkout to the specified branch
 git checkout -b $BRANCH
