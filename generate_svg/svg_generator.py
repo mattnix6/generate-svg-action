@@ -1,14 +1,31 @@
+import sys
 import subprocess
 from collections import defaultdict
 import os
 
-def generate_commit_percentage_svg():
+def generate_commit_percentage_svg(token, repository, branch="main"):
     """
     Generates a commit percentage dashboard SVG for users with @smartone.ai email addresses.
+    :param token: Personal access token or GitHub Actions token for authentication.
+    :param repository: Repository in the format 'owner/repo'.
+    :param branch: Branch name to fetch logs from.
     """
+    repo_url = f"https://{token}@github.com/{repository}.git"
+    
+    # Clone the repository using the token
+    repo_dir = "temp_repo"
+    if os.path.exists(repo_dir):
+        subprocess.run(["rm", "-rf", repo_dir])  # Clean up if the directory already exists
+    subprocess.run(["git", "clone", "--branch", branch, repo_url, repo_dir])
+
+    # Move to the cloned repository
+    os.chdir(repo_dir)
+
+    # Fetch commit logs
     result = subprocess.run(["git", "log", "--pretty=format:%an <%ae>"], capture_output=True, text=True)
     commit_logs = result.stdout.splitlines()
 
+    # Process logs for users with @smartone.ai email addresses
     email_to_name = {}
     commit_count = defaultdict(int)
 
@@ -19,9 +36,11 @@ def generate_commit_percentage_svg():
             commit_count[email] += 1
             email_to_name[email] = name
 
+    # Calculate percentages
     total_commits = sum(commit_count.values())
     percentages = {email: (count / total_commits) * 100 for email, count in commit_count.items()}
 
+    # Generate SVG
     svg_width = 600
     bar_width = 400
     bar_height = 20
@@ -55,12 +74,23 @@ def generate_commit_percentage_svg():
 
     svg_content += "</svg>"
 
+    # Write SVG to output directory
     os.makedirs("output", exist_ok=True)
-    with open("output/commit_percentage.svg", "w") as f:
+    with open("../output/commit_percentage.svg", "w") as f:  # Save outside the temp_repo
         f.write(svg_content)
 
     print("SVG generated successfully!")
 
-# Calling the function to generate the SVG
+    # Clean up cloned repo
+    os.chdir("..")
+    subprocess.run(["rm", "-rf", repo_dir])
+
+# Entry point for the script
 if __name__ == "__main__":
-    generate_commit_percentage_svg()
+    if len(sys.argv) != 3:
+        print("Usage: python -m generate_svg.svg_generator <TOKEN> <REPOSITORY>")
+        sys.exit(1)
+
+    TOKEN = sys.argv[1]
+    REPOSITORY = sys.argv[2]
+    generate_commit_percentage_svg(TOKEN, REPOSITORY)
