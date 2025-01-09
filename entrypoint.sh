@@ -42,4 +42,5 @@ git remote set-url origin https://github-actions:$TOKEN@github.com/$REPOSITORY.g
 
 git add output/commit_percentage.svg
 git commit -m "Update commit percentage dashboard SVG"
-git push --set-upstream origin $BRANCH
+git push --force --set-upstream origin $BRANCH
+
